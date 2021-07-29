@@ -1,9 +1,10 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]
-then
-    echo "Missing argument"
-    exit 0
-else 
-    docker exec broker kafka-console-consumer --topic $1 --from-beginning --bootstrap-server localhost:9092
-fi
+
+docker exec -it broker bash
+
+kafka-console-consumer --topic group-create-topic \
+ --bootstrap-server broker:9092 \
+ --from-beginning \
+ --property print.key=true \
+ --property key.separator=" : "
